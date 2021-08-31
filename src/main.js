@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueApollo from 'vue-apollo'
 import App from './App.vue'
 import apolloClient from './vue-apollo'
+import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
 // Install the vue plugin
@@ -13,5 +14,6 @@ const apolloProvider = new VueApollo({
 
 new Vue({
   apolloProvider,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')

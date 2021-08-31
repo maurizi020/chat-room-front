@@ -4,5 +4,9 @@ module.exports = {
       enableMocks: true,
       enableEngine: false
     }
-  }
+  },
+
+  transpileDependencies: [
+    'vuetify'
+  ]
 }
