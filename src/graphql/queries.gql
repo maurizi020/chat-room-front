@@ -1,0 +1,10 @@
+query {
+  getMessages {
+    _id
+    userName
+    timestamp
+    text
+    typography
+    color
+  }
+}
