@@ -1,5 +1,10 @@
 subscription {
   newMessage {
-    ...message
+    _id
+    userName
+    timestamp
+    text
+    typography
+    color
   }
 }

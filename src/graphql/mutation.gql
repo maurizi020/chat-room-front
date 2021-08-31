@@ -1,5 +1,10 @@
 mutation addMessage($input: messageInput){
     addMessage(input: $input) {
-        ...message
-    }
+    _id
+    userName
+    timestamp
+    text
+    typography
+    color
+  }
 }

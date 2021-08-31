@@ -15,70 +15,47 @@
     <ApolloQuery
       :query="require('../graphql/queries.gql')"
     >
-      <!-- <ApolloSubscribeToMore
+      <ApolloSubscribeToMore
         :document="require('../graphql/subscription.gql')"
-        :update-query="newMessage"
-      /> -->
+        :updateQuery="onMessageAdded"
+      />
 
       <div slot-scope="{ result: { data } }">
         <template v-if="data">
           <div
-            v-for="message of data.messages"
-            :key="message.id"
+            v-for="message of data.getMessages"
+            :key="message._id"
             class="message"
           >
-            {{ message.message }}
+            {{ message.text }}
           </div>
         </template>
       </div>
     </ApolloQuery>
 
-    <!-- Tchat example 
+    <!-- Tchat example -->
 
 
     <ApolloMutation
       :mutation="require('../graphql/mutation.gql')"
       :variables="{
-        input: {
-          text: newMessage,
-        },
+        input,
       }"
       class="form"
-      @done="newMessage = ''"
+      @done="input.text = ''"
     >
       <template slot-scope="{ mutate }">
         <form v-on:submit.prevent="formValid && mutate()">
           <label for="field-message">Message</label>
           <input
             id="field-message"
-            v-model="newMessage"
+            v-model="input.text"
             placeholder="Type a message"
             class="input"
           >
         </form>
       </template>
     </ApolloMutation>
-
-    <div class="images">
-      <div
-        v-for="file of files"
-        :key="file.id"
-        class="image-item"
-      >
-        <img :src="`${$filesRoot}/${file.path}`" class="image"/>
-      </div>
-    </div>
-
-    <div class="image-input">
-      <label for="field-image">Image</label>
-      <input
-        id="field-image"
-        type="file"
-        accept="image/*"
-        required
-        @change="onUploadImage"
-      >
-    </div>-->
   </div>
 </template>
 
@@ -90,6 +67,13 @@ export default {
     return {
       name: 'Anne',
       newMessage: '',
+      input: {
+        userName: "Sergio",
+        timestamp: Date.now(),
+        typography: "negritas",
+        color: "negro",
+        text: '',
+      }
     }
   },
   async created() {
@@ -100,18 +84,15 @@ export default {
 
   computed: {
     formValid () {
-      return this.newMessage
+      return this.input.text
     },
   },
 
   methods: {
     onMessageAdded (previousResult, { subscriptionData }) {
-      return {
-        messages: [
-          ...previousResult.messages,
-          subscriptionData.data.messageAdded,
-        ],
-      }
+      console.log(previousResult, subscriptionData);
+      previousResult.getMessages.push(subscriptionData.data.newMessage);
+      return previousResult;
     },
   },
 }
