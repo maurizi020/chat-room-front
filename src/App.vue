@@ -8,6 +8,7 @@
 
 <script>
 import Login from './components/Login.vue';
+import ChatInput from './components/ChatInput.vue';
 
 export default {
   name: 'App',
