@@ -8,15 +8,15 @@
 </template>
 
 <script>
-// import ApolloExample from './components/ApolloExample';
-import ChatInput from './components/ChatInput'
+// import ApolloExample from './components/ApolloExample.vue';
+import ChatInput from './components/ChatInput.vue';
 
 export default {
   name: 'App',
 
   components: {
     // ApolloExample,
-    ChatInput
+    ChatInput,
   },
 
   data: () => ({
