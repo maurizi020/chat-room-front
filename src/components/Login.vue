@@ -52,8 +52,8 @@
                     <v-row>
                       <v-col>
                         <v-select
-                          v-model="tipography"
-                          :items="tipographys"
+                          v-model="typography"
+                          :items="typographies"
                           label="Typography"
                         >
                         </v-select>
@@ -88,9 +88,9 @@ export default {
       clickFlag: false,
       userName: '',
       color: '',
-      tipography: '',
+      typography: '',
       colors: ['red', 'pink', 'purple', 'blue', 'deep-purple'],
-      tipographys: [
+      typographies: [
         'h1',
         'h2',
         'h3',
@@ -110,15 +110,15 @@ export default {
   methods: {
     isEmpty() {
       return (
-        this.userName === '' && this.color === '' && this.tipography === ''
+        this.userName === '' && this.color === '' && this.typography === ''
       );
     },
     saveData() {
       this.clickFlag = true;
       if (!this.isEmpty()) {
-        const textTypography = `text-${this.tipography}`;
+        const textTypography = `text-${this.typography}`;
         sessionStorage.setItem('user', JSON.stringify({
-          tipography: textTypography,
+          typography: textTypography,
           color: this.color,
           userName: this.userName,
         }));
