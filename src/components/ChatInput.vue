@@ -35,7 +35,8 @@
                         ]"
                     >
                         <div v-if="message.userName == input.userName"
-                        class="rounded-lg light-blue lighten-5 row-6">
+                        class="rounded-lg light-blue lighten-5 row-6"
+                        style="min-width: 300px; height: 150px;">
                             <div class="col d-flex justify-start">
                                 <v-avatar
                                 color="indigo" size="36">
@@ -44,7 +45,7 @@
                                     </span>
                                 </v-avatar>
                                 <span
-                                class="ml-1"
+                                class="ml-2 mt-1 d-flex"
                                 >{{ message.userName + ": " }}
                                 </span>
                             </div>
@@ -63,20 +64,21 @@
 
                         </div>
                         <div v-else class="rounded-lg red lighten-4 row-6">
-                            <div class="col d-flex justify-start">
+                            <div class="col d-flex justify-start"
+                            style="min-width: 20em;">
                                 <v-avatar color="red" size="36">
                                     <span v-if="message.userName" class="white--text">
                                         {{ message.userName.charAt(0) }}
                                     </span>
                                 </v-avatar>
                                 <span
-                                class="ml-1"
+                                class="ml-2 mt-1 d-flex"
                                 >{{ message.userName + ": "}}
                                 </span>
                             </div>
                             <div class="col">
                                 <span
-                                class="blue--text"
+                                class="blue--text "
                                 >{{ message.text }}
                                 </span>
                             </div>
@@ -100,9 +102,7 @@
                 <v-col>
                 <ApolloMutation
                     :mutation="require('../graphql/mutation.gql')"
-                    :variables="{
-                    input,
-                    }"
+                    :variables="messageInput()"
                     @done="input.text = ''"
                 >
                     <template slot-scope="{ mutate }">
@@ -144,18 +144,20 @@ export default {
     return {
       newMessage: '',
       input: {
-        userName: 'Sergio',
-        timestamp: Date.now(),
-        typography: 'negritas',
-        color: 'negro',
+        userName: '',
+        timestamp: 0,
+        typography: '',
+        color: '',
         text: '',
       },
     };
   },
-  /* async created() {
-    const result = await this.$apollo.query({ query: QUERIES });
-    console.log(result);
-  }, */
+  created() {
+    const result = JSON.parse(sessionStorage.getItem('user'));
+    this.input.userName = result.userName;
+    this.input.typography = result.typography;
+    this.input.color = result.color;
+  },
 
   computed: {
     formValid() {
@@ -168,6 +170,17 @@ export default {
       // console.log(previousResult, subscriptionData);
       previousResult.getMessages.push(subscriptionData.data.newMessage);
       return previousResult;
+    },
+    messageInput() {
+      return {
+        input: {
+          userName: this.input.userName,
+          timestamp: Date.now(),
+          typography: this.input.typography,
+          color: this.input.color,
+          text: this.input.text,
+        },
+      };
     },
   },
 };
