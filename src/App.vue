@@ -1,22 +1,21 @@
 <template>
   <v-app>
     <v-main>
-      <!-- <ApolloExample/> -->
-      <chatInput/>
+      <Login/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-// import ApolloExample from './components/ApolloExample.vue';
-import ChatInput from './components/ChatInput.vue';
+import Login from './components/Login.vue';
 
 export default {
   name: 'App',
 
   components: {
     // ApolloExample,
-    ChatInput,
+    // ChatInput,
+    Login,
   },
 
   data: () => ({
