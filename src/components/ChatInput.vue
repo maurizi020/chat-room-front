@@ -2,9 +2,6 @@
     <div id="app">
         <v-app app>
         <v-app-bar color="blue" app>
-            <!-- <v-app-bar-nav-icon>
-            <v-icon color="white">mdi-arrow-left</v-icon>
-            </v-app-bar-nav-icon> -->
             <v-toolbar-title class="white--text">{{ input.userName }} </v-toolbar-title>
         </v-app-bar>
         <v-container>
@@ -19,13 +16,6 @@
 
                 <div slot-scope="{ result: { data } }">
                     <template v-if="data">
-                    <!-- <div
-                        v-for="message of data.getMessages"
-                        :key="message._id"
-                        class="message"
-                    >
-                        {{ message.text }}
-                    </div> -->
                     <div
                         v-for="message of data.getMessages"
                         :key="message._id"
@@ -39,7 +29,7 @@
                         style="min-width: 300px; height: 150px;">
                             <div class="col d-flex justify-start">
                                 <v-avatar
-                                color="indigo" size="36">
+                                :color="input.color" size="36">
                                     <span v-if="message.userName" class="white--text">
                                         {{ message.userName.charAt(0) }}
                                     </span>
@@ -51,7 +41,7 @@
                             </div>
                             <div class="col">
                                 <span
-                                class="blue--text"
+                                :class="['blue--text ',input.typography]"
                                 >{{ message.text }}
                                 </span>
                             </div>
@@ -106,14 +96,6 @@
                     @done="input.text = ''"
                 >
                     <template slot-scope="{ mutate }">
-                    <!-- <form v-on:submit.prevent="formValid && mutate()">
-                                <input
-                                    id="field-message"
-                                    v-model="input.text"
-                                    placeholder="Type a message"
-                                    class="input"
-                                >
-                            </form> -->
                     <div class="d-flex flex-row align-center">
                         <v-text-field
                         v-model="input.text"
@@ -135,7 +117,6 @@
 </template>
 
 <script>
-// import QUERIES from '../graphql/queries.gql';
 
 export default {
   name: 'ChatInput',
@@ -157,6 +138,8 @@ export default {
     this.input.userName = result.userName;
     this.input.typography = result.typography;
     this.input.color = result.color;
+    // eslint-disable-next-line no-console
+    console.log(this.input);
   },
 
   computed: {
@@ -167,7 +150,6 @@ export default {
 
   methods: {
     onMessageAdded(previousResult, { subscriptionData }) {
-      // console.log(previousResult, subscriptionData);
       previousResult.getMessages.push(subscriptionData.data.newMessage);
       return previousResult;
     },
