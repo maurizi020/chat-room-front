@@ -29,7 +29,7 @@
                         style="min-width: 300px; height: 150px;">
                             <div class="col d-flex justify-start">
                                 <v-avatar
-                                :color="input.color" size="36">
+                                :color="message.color" size="36">
                                     <span v-if="message.userName" class="white--text">
                                         {{ message.userName.charAt(0) }}
                                     </span>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="col">
                                 <span
-                                :class="['blue--text ',input.typography]"
+                                :class="['blue--text ',message.typography]"
                                 >{{ message.text }}
                                 </span>
                             </div>
@@ -53,10 +53,11 @@
                             </div>
 
                         </div>
-                        <div v-else class="rounded-lg red lighten-4 row-6">
-                            <div class="col d-flex justify-start"
-                            style="min-width: 20em;">
-                                <v-avatar color="red" size="36">
+                        <div v-else
+                        class="rounded-lg red lighten-4 row-6"
+                        style="min-width: 300px; height: 150px;">
+                            <div class="col d-flex justify-start">
+                                <v-avatar :color="message.color" size="36">
                                     <span v-if="message.userName" class="white--text">
                                         {{ message.userName.charAt(0) }}
                                     </span>
@@ -68,7 +69,7 @@
                             </div>
                             <div class="col">
                                 <span
-                                class="blue--text "
+                                :class="['blue--text ',message.typography]"
                                 >{{ message.text }}
                                 </span>
                             </div>
@@ -138,8 +139,6 @@ export default {
     this.input.userName = result.userName;
     this.input.typography = result.typography;
     this.input.color = result.color;
-    // eslint-disable-next-line no-console
-    console.log(this.input);
   },
 
   computed: {
