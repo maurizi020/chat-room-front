@@ -283,8 +283,6 @@ export default {
           variables: { input: this.searchMessage },
         });
         this.searchList = data.searchMessage;
-        // eslint-disable-next-line no-console
-        console.log(this.searchList);
       }
     },
   },
