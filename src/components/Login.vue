@@ -91,12 +91,6 @@ export default {
       typography: '',
       colors: ['red', 'pink', 'purple', 'blue', 'deep-purple'],
       typographies: [
-        'h1',
-        'h2',
-        'h3',
-        'h4',
-        'h5',
-        'h6',
         'subtitle-1',
         'subtitle-2',
         'body-1',
@@ -122,6 +116,7 @@ export default {
           color: this.color,
           userName: this.userName,
         }));
+        this.$router.push('chat');
       } else {
         this.alertFlag = true;
         this.clickFlag = false;
