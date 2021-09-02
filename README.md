@@ -1,4 +1,6 @@
-# ejemplo
+# Chat-Room
+
+before running chat-room-front please execute the instructions in chat-room
 
 ## Project setup
 ```
