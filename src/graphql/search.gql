@@ -1,0 +1,10 @@
+query ($input: String!){
+  searchMessage(input: $input) {
+    _id
+    userName
+    timestamp
+    text
+    typography
+    color
+  }
+}
