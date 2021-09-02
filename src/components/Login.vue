@@ -45,7 +45,7 @@
                         <v-select
                           v-model="color"
                           :items="colors"
-                          label="Color"
+                          label="Avatar Color"
                         ></v-select>
                       </v-col>
                     </v-row>
